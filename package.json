@@ -1,0 +1,20 @@
+{
+  "name": "com.generalisk.editor.quick-build",
+  "version": "1.0.0",
+  "displayName": "Quick Build",
+  "description": "Quick Build allows you to build for multiple platforms without having to constantly switch between A bunch of platforms/profiles and compiling each and every single one manually.",
+  "unity": "6000.0",
+  "author": {
+    "name": "Generalisk",
+    "email": "contact@generalisk.com",
+    "url": "https://generalisk.com"
+  },
+  "license": "MIT",
+  "licensesUrl": "https://github.com/Generalisk/Unity-CleanBuild/LICENSE",
+  "changelogUrl": "https://github.com/Generalisk/Unity-CleanBuild/releases",
+  "keywords": [
+    "editor",
+    "build",
+    "clean"
+  ]
+}
