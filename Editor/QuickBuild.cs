@@ -136,6 +136,8 @@ namespace Generalisk.QuickBuild.Editor
                     if (!EditorUtility.DisplayDialog("An Error has Occurred while compiling", "Do you wish to continue compiling?", "Yes!", "No!"))
                     { return; }
                 }
+
+                EditorUtility.RevealInFinder("Build/Player/Untitled");
             }
         }
 
@@ -180,6 +182,8 @@ namespace Generalisk.QuickBuild.Editor
                     subtarget = subtarget,
 #endif // DEDICATEDSERVER_SUPPORT
                 });
+
+                EditorUtility.RevealInFinder("Build/Bundles/Untitled");
             }
         }
 #endif // ASSETBUNDLE_SUPPORT
