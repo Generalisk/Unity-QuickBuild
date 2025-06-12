@@ -26,7 +26,7 @@
 
 Quick Build allows you to build for multiple platforms without having to constantly switch between A bunch of platforms/profiles and compiling each and every single one manually.
 
-Quick Build also supports the compilation of Asset Bundles and Addressables, but said packages are not required for this package to work.
+Quick Build also supports the compilation of Asset Bundles and Addressables, but said packages are not required for this package to operate.
 
 # Contents
 - [Requirements](#requirements)
