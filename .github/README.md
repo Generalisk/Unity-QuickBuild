@@ -38,6 +38,7 @@ Quick Build also supports the compilation of Asset Bundles and Addressables, but
   - [Method 1](#method-1)
   - [Method 2](#method-2)
 - [Licensing](#licensing)
+- [Credits](#credits)
 - [Contributing](#contributing)
 - [Planned Features](#planned-features)
 
@@ -82,6 +83,9 @@ There are multiple ways to add this package into your project:
 
 # Licensing
 This package is licenced under the `MIT License`, more info can be found [here](../LICENSE).
+
+# Credits
+- [List of Contributors](CONTRIBUTORS.md)
 
 # Contributing
 Before you go and make A pull request, please make sure that your request follows our [Contribution Guidelines](CONTRIBUTING.md).
