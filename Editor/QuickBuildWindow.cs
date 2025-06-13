@@ -35,10 +35,14 @@ namespace Generalisk.QuickBuild.Editor
         /// </summary>
         void OnGUI()
         {
-            while (enabled.Count < Platforms.Length)
-            { enabled.Add(false); }
-            while (enabled.Count > Platforms.Length)
-            { enabled.RemoveAt(enabled.Count - 1); }
+            // Reload save data if platform list updated
+            if (Platforms.Length != enabled.Count)
+            {
+                enabled.Clear();
+
+                foreach (PlatformInfo platform in Platforms)
+                { enabled.Add(SaveData.Get(platform)); }
+            }
 
             // Build Type (Player, Asset Bundles, Addressables etc.)
 #if ASSETBUNDLE_SUPPORT || ADDRESSABLE_SUPPORT
@@ -129,6 +133,10 @@ namespace Generalisk.QuickBuild.Editor
             { QuickBuild.Build(buildType, isDebugBuild, GetPlatforms()); }
             EditorGUI.EndDisabledGroup();
             EndHorizontal();
+
+            // Save data
+            for (int i = 0; i < Platforms.Length; i++)
+            { SaveData.Set(Platforms[i], enabled[i]); }
         }
 
         /// <summary>
