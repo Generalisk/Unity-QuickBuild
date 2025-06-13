@@ -39,6 +39,7 @@ namespace Generalisk.QuickBuild.Editor
             if (Platforms.Length != enabled.Count)
             {
                 enabled.Clear();
+                categories.Clear();
 
                 foreach (PlatformInfo platform in Platforms)
                 { enabled.Add(SaveData.Get(platform)); }
