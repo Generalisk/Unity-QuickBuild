@@ -31,6 +31,15 @@ namespace Generalisk.QuickBuild.Editor
         }
 
         /// <summary>
+        /// Called when the Window is first opened
+        /// </summary>
+        void Awake()
+        {
+            buildType = SaveData.GetBuildType();
+            isDebugBuild = SaveData.GetConfiguration();
+        }
+
+        /// <summary>
         /// Called every time the Window needs to refresh
         /// </summary>
         void OnGUI()
@@ -136,6 +145,10 @@ namespace Generalisk.QuickBuild.Editor
             EndHorizontal();
 
             // Save data
+            // TODO: Optimize
+            SaveData.SetBuildType(buildType);
+            SaveData.SetConfiguration(isDebugBuild);
+
             for (int i = 0; i < Platforms.Length; i++)
             { SaveData.SetPlatform(Platforms[i], enabled[i]); }
         }

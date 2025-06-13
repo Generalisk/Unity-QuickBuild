@@ -110,5 +110,55 @@ namespace Generalisk.QuickBuild.Editor
             json["platforms"].Replace(platforms);
             Save(json);
         }
+
+        /// <summary>
+        /// Loads and retrieves the current build type from save
+        /// </summary>
+        /// <returns>The current build type</returns>
+        public static BuildType GetBuildType()
+        {
+            JObject json = Load();
+
+            JToken value = json["buildType"];
+            if (value == null) { return 0; }
+            return (BuildType)value.Value<int>();
+        }
+
+        /// <summary>
+        /// Sets and saves the current build type
+        /// </summary>
+        /// <param name="value">The current build type</param>
+        public static void SetBuildType(BuildType value)
+        {
+            JObject json = Load();
+            try { json["buildType"].Replace((int)value); }
+            catch { json.Add("buildType", (int)value); }
+            Save(json);
+        }
+
+        /// <summary>
+        /// Loads and retrieves the current build configuration from save
+        /// </summary>
+        /// <returns>true if the build is A debug build, false if the build is A release build</returns>
+        public static bool GetConfiguration()
+        {
+            JObject json = Load();
+
+            JToken value = json["isDebug"];
+            if (value == null) { return false; }
+            return value.Value<bool>();
+        }
+
+        /// <summary>
+        /// Sets and saves the current build configuration
+        /// </summary>
+        /// <param name="isDebug">If the current build is A debug build</param>
+        public static void SetConfiguration(bool isDebug)
+        {
+            JObject json = Load();
+            try { json["isDebug"].Replace(isDebug); }
+            catch { json.Add("isDebug", isDebug); }
+            Save(json);
+        }
     }
 }
