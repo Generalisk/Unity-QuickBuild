@@ -47,18 +47,26 @@ namespace Generalisk.QuickBuild.Editor
         /// </summary>
         /// <param name="platform">The platform to load the info for</param>
         /// <returns>The retrieved value, returns false if the platform is unassigned in the save data</returns>
-        public static bool Get(PlatformInfo platform)
-        { return Get(platform.code); }
+        public static bool GetPlatform(PlatformInfo platform)
+        { return GetPlatform(platform.code); }
 
         /// <summary>
         /// Gets the value of A platform
         /// </summary>
         /// <param name="name">The platform code to load the info for</param>
         /// <returns>The retrieved value, returns false if the platform is unassigned in the save data</returns>
-        public static bool Get(string name)
+        public static bool GetPlatform(string name)
         {
             JObject json = Load();
-            JToken value = json[name];
+
+            JToken token = json["platforms"];
+            if (token == null)
+            {
+                json.Add("platforms", new JObject());
+                token = json["platforms"];
+            }
+
+            JToken value = token[name];
             if (value == null)
             { return false; }
             return value.Value<bool>();
@@ -69,19 +77,30 @@ namespace Generalisk.QuickBuild.Editor
         /// </summary>
         /// <param name="platform">The platform to assign the save value for</param>
         /// <param name="value">The value to save</param>
-        public static void Set(PlatformInfo platform, bool value)
-        { Set(platform.code, value); }
+        public static void SetPlatform(PlatformInfo platform, bool value)
+        { SetPlatform(platform.code, value); }
 
         /// <summary>
         /// Sets & saves the value of A platform
         /// </summary>
         /// <param name="name">The code of the platform to assign the save value for</param>
         /// <param name="value">The value to save</param>
-        public static void Set(string name, bool value)
+        public static void SetPlatform(string name, bool value)
         {
             JObject json = Load();
-            try { json[name].Replace(value); }
-            catch { json.Add(name, value); }
+
+            JToken token = json["platforms"];
+            if (token == null)
+            {
+                json.Add("platforms", new JObject());
+                token = json["platforms"];
+            }
+
+            JObject platforms = token.ToObject<JObject>();
+            try { platforms[name].Replace(value); }
+            catch { platforms.Add(name, value); }
+
+            json["platforms"].Replace(platforms);
             Save(json);
         }
     }

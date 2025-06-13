@@ -42,7 +42,7 @@ namespace Generalisk.QuickBuild.Editor
                 categories.Clear();
 
                 foreach (PlatformInfo platform in Platforms)
-                { enabled.Add(SaveData.Get(platform)); }
+                { enabled.Add(SaveData.GetPlatform(platform)); }
             }
 
             // Build Type (Player, Asset Bundles, Addressables etc.)
@@ -137,7 +137,7 @@ namespace Generalisk.QuickBuild.Editor
 
             // Save data
             for (int i = 0; i < Platforms.Length; i++)
-            { SaveData.Set(Platforms[i], enabled[i]); }
+            { SaveData.SetPlatform(Platforms[i], enabled[i]); }
         }
 
         /// <summary>
