@@ -212,8 +212,19 @@ namespace Generalisk.QuickBuild.Editor
             return platforms.ToArray();
         }
 
+        /// <summary>
+        /// Calculates the width of the Property Name/Label based on the current indent level
+        /// </summary>
+        /// <returns>The width of the Property Name/Label</returns>
         private float GetLabelWidth() { return EditorGUIUtility.labelWidth - (EditorGUI.indentLevel * 15); }
 
+        /// <summary>
+        /// Gets the index of the requested category
+        /// 
+        /// Creates A new category if the category requested does not currently exist
+        /// </summary>
+        /// <param name="name">The name of the category to find</param>
+        /// <returns>The index of the requested category</returns>
         private int GetCategoryIndex(string name)
         {
             for (int i = 0; i < categories.Count; i++)
@@ -227,6 +238,11 @@ namespace Generalisk.QuickBuild.Editor
             return categories.Count - 1;
         }
 
+        /// <summary>
+        /// Gets the state of the category checkbox
+        /// </summary>
+        /// <param name="index">the category index</param>
+        /// <returns>true if all items attached to the category are checked, false otherwise</returns>
         private bool GetCategory(int index)
         {
             foreach (byte i in categories[index].indexes)

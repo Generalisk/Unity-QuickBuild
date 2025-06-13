@@ -216,7 +216,7 @@ namespace Generalisk.QuickBuild.Editor
                 case "server": return EditorGUIUtility.IconContent("BuildSettings.DedicatedServer On").image;
 #endif // DEDICATEDSERVER_SUPPORT
                 case "windows": return EditorGUIUtility.IconContent("BuildSettings.Metro On").image;
-                // Couldn't find OSX Icon so this will have to do since in the version i'm developing this on (6.1), this icon is just the apple icon.
+                // Couldn't find the OSX Icon so this will have to do since in the version i'm developing this on (6.1), this icon is just the apple icon.
                 case "osx": case "macos": return EditorGUIUtility.IconContent("BuildSettings.tvOS On").image;
                 case "linux": return EditorGUIUtility.IconContent("BuildSettings.EmbeddedLinux On").image;
                 case "android": return EditorGUIUtility.IconContent("BuildSettings.Android On").image;
