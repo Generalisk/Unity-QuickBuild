@@ -65,6 +65,8 @@ namespace Generalisk.QuickBuild.Editor
         /// <returns>The retrieved value, returns false if the platform is unassigned in the save data</returns>
         public static bool GetPlatform(string name)
         {
+            name = name.ToSavePropertyName();
+
             JObject json = Load();
 
             JToken token = json["platforms"];
@@ -74,7 +76,7 @@ namespace Generalisk.QuickBuild.Editor
                 token = json["platforms"];
             }
 
-            JToken value = token[name.ToSavePropertyName()];
+            JToken value = token[name];
             if (value == null) { return false; }
             return value.Value<bool>();
         }
@@ -94,6 +96,8 @@ namespace Generalisk.QuickBuild.Editor
         /// <param name="value">The value to save</param>
         public static void SetPlatform(string name, bool value)
         {
+            name = name.ToSavePropertyName();
+
             JObject json = Load();
 
             JToken token = json["platforms"];
@@ -104,8 +108,15 @@ namespace Generalisk.QuickBuild.Editor
             }
 
             JObject platforms = token.ToObject<JObject>();
-            try { platforms[name.ToSavePropertyName()].Replace(value); }
-            catch { platforms.Add(name.ToSavePropertyName(), value); }
+
+            if (platforms.ContainsKey(name))
+            {
+                if (platforms[name].Value<bool>() == value)
+                { return; }
+            }
+
+            try { platforms[name].Replace(value); }
+            catch { platforms.Add(name, value); }
 
             json["platforms"].Replace(platforms);
             Save(json);
@@ -131,8 +142,9 @@ namespace Generalisk.QuickBuild.Editor
         public static void SetBuildType(BuildType value)
         {
             JObject json = Load();
-            try { json["buildType"].Replace((int)value); }
-            catch { json.Add("buildType", (int)value); }
+            if (json.ContainsKey("buildType"))
+            { json["buildType"].Replace((int)value); }
+            else { json.Add("buildType", (int)value); }
             Save(json);
         }
 
@@ -156,8 +168,9 @@ namespace Generalisk.QuickBuild.Editor
         public static void SetConfiguration(bool isDebug)
         {
             JObject json = Load();
-            try { json["isDebug"].Replace(isDebug); }
-            catch { json.Add("isDebug", isDebug); }
+            if (json.ContainsKey("isDebug"))
+            { json["isDebug"].Replace(isDebug); }
+            else { json.Add("isDebug", isDebug); }
             Save(json);
         }
     }

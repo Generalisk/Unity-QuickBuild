@@ -145,7 +145,6 @@ namespace Generalisk.QuickBuild.Editor
             EndHorizontal();
 
             // Save data
-            // TODO: Optimize
             SaveData.SetBuildType(buildType);
             SaveData.SetConfiguration(isDebugBuild);
 
