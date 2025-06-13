@@ -9,7 +9,7 @@ namespace Generalisk.QuickBuild.Editor
         /// <summary>
         /// The path where the save data is located, relative to the projects root folder
         /// </summary>
-        private const string SavePath = "UserSettings/QuickBuild.json";
+        internal const string SavePath = "UserSettings/QuickBuild.json";
 
         /// <summary>
         /// Loads the save data.
@@ -43,6 +43,14 @@ namespace Generalisk.QuickBuild.Editor
         }
 
         /// <summary>
+        /// Converts the text into A string to be used as the property name
+        /// </summary>
+        /// <param name="str">The Input</param>
+        /// <returns>The Output</returns>
+        internal static string ToSavePropertyName(this string str)
+        { return str.ToLower().Replace(" ", "_").Replace("(", "").Replace(")", "").Replace("_-_", "-"); }
+
+        /// <summary>
         /// Gets the value of A platform
         /// </summary>
         /// <param name="platform">The platform to load the info for</param>
@@ -66,9 +74,8 @@ namespace Generalisk.QuickBuild.Editor
                 token = json["platforms"];
             }
 
-            JToken value = token[name];
-            if (value == null)
-            { return false; }
+            JToken value = token[name.ToSavePropertyName()];
+            if (value == null) { return false; }
             return value.Value<bool>();
         }
 
@@ -97,8 +104,8 @@ namespace Generalisk.QuickBuild.Editor
             }
 
             JObject platforms = token.ToObject<JObject>();
-            try { platforms[name].Replace(value); }
-            catch { platforms.Add(name, value); }
+            try { platforms[name.ToSavePropertyName()].Replace(value); }
+            catch { platforms.Add(name.ToSavePropertyName(), value); }
 
             json["platforms"].Replace(platforms);
             Save(json);
